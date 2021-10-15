@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bjpowernode.crm.settings.mapper.TblUserMapper" >
+  <resultMap id="BaseResultMap" type="com.bjpowernode.crm.settings.domain.TblUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="login_act" property="loginAct" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="expire_time" property="expireTime" jdbcType="VARCHAR" />
+    <result column="lock_state" property="lockState" jdbcType="CHAR" />
+    <result column="dept_no" property="deptNo" jdbcType="CHAR" />
+    <result column="allow_ips" property="allowIps" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="edit_time" property="editTime" jdbcType="VARCHAR" />
+    <result column="edit_by" property="editBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, login_act, name, login_pwd, email, expire_time, lock_state, dept_no, allow_ips, 
+    create_time, create_by, edit_time, edit_by
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bjpowernode.crm.settings.domain.TblUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tbl_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bjpowernode.crm.settings.domain.TblUserExample" >
+    delete from tbl_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bjpowernode.crm.settings.domain.TblUser" >
+    insert into tbl_user (id, login_act, name, 
+      login_pwd, email, expire_time, 
+      lock_state, dept_no, allow_ips, 
+      create_time, create_by, edit_time, 
+      edit_by)
+    values (#{id,jdbcType=VARCHAR}, #{loginAct,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{loginPwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{expireTime,jdbcType=VARCHAR}, 
+      #{lockState,jdbcType=CHAR}, #{deptNo,jdbcType=CHAR}, #{allowIps,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{editTime,jdbcType=VARCHAR}, 
+      #{editBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjpowernode.crm.settings.domain.TblUser" >
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loginAct != null" >
+        login_act,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="loginPwd != null" >
+        login_pwd,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="lockState != null" >
+        lock_state,
+      </if>
+      <if test="deptNo != null" >
+        dept_no,
+      </if>
+      <if test="allowIps != null" >
+        allow_ips,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="editTime != null" >
+        edit_time,
+      </if>
+      <if test="editBy != null" >
+        edit_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAct != null" >
+        #{loginAct,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lockState != null" >
+        #{lockState,jdbcType=CHAR},
+      </if>
+      <if test="deptNo != null" >
+        #{deptNo,jdbcType=CHAR},
+      </if>
+      <if test="allowIps != null" >
+        #{allowIps,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null" >
+        #{editTime,jdbcType=VARCHAR},
+      </if>
+      <if test="editBy != null" >
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bjpowernode.crm.settings.domain.TblUserExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginAct != null" >
+        login_act = #{record.loginAct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginPwd != null" >
+        login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expireTime != null" >
+        expire_time = #{record.expireTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockState != null" >
+        lock_state = #{record.lockState,jdbcType=CHAR},
+      </if>
+      <if test="record.deptNo != null" >
+        dept_no = #{record.deptNo,jdbcType=CHAR},
+      </if>
+      <if test="record.allowIps != null" >
+        allow_ips = #{record.allowIps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editTime != null" >
+        edit_time = #{record.editTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editBy != null" >
+        edit_by = #{record.editBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      login_act = #{record.loginAct,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      login_pwd = #{record.loginPwd,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      expire_time = #{record.expireTime,jdbcType=VARCHAR},
+      lock_state = #{record.lockState,jdbcType=CHAR},
+      dept_no = #{record.deptNo,jdbcType=CHAR},
+      allow_ips = #{record.allowIps,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      edit_time = #{record.editTime,jdbcType=VARCHAR},
+      edit_by = #{record.editBy,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpowernode.crm.settings.domain.TblUser" >
+    update tbl_user
+    <set >
+      <if test="loginAct != null" >
+        login_act = #{loginAct,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null" >
+        login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=VARCHAR},
+      </if>
+      <if test="lockState != null" >
+        lock_state = #{lockState,jdbcType=CHAR},
+      </if>
+      <if test="deptNo != null" >
+        dept_no = #{deptNo,jdbcType=CHAR},
+      </if>
+      <if test="allowIps != null" >
+        allow_ips = #{allowIps,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null" >
+        edit_time = #{editTime,jdbcType=VARCHAR},
+      </if>
+      <if test="editBy != null" >
+        edit_by = #{editBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpowernode.crm.settings.domain.TblUser" >
+    update tbl_user
+    set login_act = #{loginAct,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      login_pwd = #{loginPwd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      expire_time = #{expireTime,jdbcType=VARCHAR},
+      lock_state = #{lockState,jdbcType=CHAR},
+      dept_no = #{deptNo,jdbcType=CHAR},
+      allow_ips = #{allowIps,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      edit_time = #{editTime,jdbcType=VARCHAR},
+      edit_by = #{editBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

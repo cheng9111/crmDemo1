@@ -1,0 +1,7 @@
+com\bjpowernode\crm\commons\utils\MD5Util.class
+com\bjpowernode\crm\commons\utils\UUIDUtils.class
+com\bjpowernode\crm\commons\utils\HandleFlag.class
+com\bjpowernode\crm\settings\web\interceptor\LoginInterceptor.class
+com\bjpowernode\crm\settings\web\controller\SettingsIndexController.class
+com\bjpowernode\crm\commons\utils\DateUtils.class
+com\bjpowernode\crm\web\controller\IndexController.class
